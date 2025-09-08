@@ -1,3 +1,7 @@
 export default function ConnectButton() {
-  return <appkit-button />;
+  return (
+    <div className="font-sora">
+      <appkit-button />
+    </div>
+  );
 }

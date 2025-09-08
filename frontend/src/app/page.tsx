@@ -2,73 +2,40 @@
 
 import { useState } from "react";
 import ConnectButton from "@/components/Connectbtn";
+import { useAccount } from "wagmi";
 
 export default function Home() {
-  const [isConnected, setIsConnected] = useState(false);
-  const [walletAddress, setWalletAddress] = useState("");
+  const { address, isConnected } = useAccount();
   const [nectrBalance, setNectrBalance] = useState("0");
   const [stakedBalance, setStakedBalance] = useState("0");
   const [pendingRewards, setPendingRewards] = useState("0");
-
-  // Mock data for demonstration - will be replaced with real wallet integration
-  // The ConnectButton component should trigger wallet connection and update these states
-  // via props/callbacks or through a global context/state management solution
-  const simulateWalletConnection = () => {
-    setIsConnected(true);
-    setWalletAddress("0x1234...5678");
-    setNectrBalance("1,250.5");
-    setStakedBalance("500.0");
-    setPendingRewards("25.75");
-  };
 
   return (
     <div className="min-h-screen">
       {/* Navigation */}
       <nav className="flex items-center justify-between p-6 relative z-10">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-lg animate-pulse-soft"></div>
           <h1 className="text-2xl font-bold gradient-text">NECTR</h1>
         </div>
 
         <div className="flex items-center space-x-4">
-          {isConnected ? (
+          {/* {isConnected ? (
             <div className="flex items-center space-x-3">
               <div className="card-glass px-4 py-2">
                 <span className="text-sm opacity-80">Connected</span>
-                <div className="font-mono text-sm">{walletAddress}</div>
+                <div className="font-mono text-sm">{address}</div>
               </div>
               <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
             </div>
-          ) : (
-            <div className="flex items-center space-x-2">
-              <ConnectButton />
-              <button
-                onClick={simulateWalletConnection}
-                className="btn-secondary text-sm px-3 py-2"
-                title="Demo connection for testing"
-              >
-                Demo
-              </button>
-            </div>
-          )}
+          ) : ( */}
+          <ConnectButton />
+          {/* )} */}
         </div>
       </nav>
 
       {/* Hero Section */}
       <main className="container mx-auto px-6 py-12">
         <div className="text-center mb-16">
-          <div className="animate-float mb-8">
-            <div className="w-24 h-24 mx-auto bg-gradient-to-r from-purple-400 to-cyan-400 rounded-2xl flex items-center justify-center mb-6">
-              <svg
-                className="w-12 h-12 text-white"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" />
-              </svg>
-            </div>
-          </div>
-
           <h1 className="text-6xl font-bold mb-6">
             Welcome to <span className="gradient-text">NECTR</span>
           </h1>
