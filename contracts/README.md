@@ -32,16 +32,19 @@ The NECTR token is an ERC-20 token with integrated staking functionality that al
 ### Installation
 
 1. Install dependencies:
+
 ```bash
 forge install
 ```
 
 2. Compile contracts:
+
 ```bash
 forge build
 ```
 
 3. Run tests:
+
 ```bash
 forge test
 ```
@@ -49,6 +52,7 @@ forge test
 ### Deployment
 
 1. Copy environment file:
+
 ```bash
 cp .env.example .env
 ```
@@ -56,6 +60,7 @@ cp .env.example .env
 2. Fill in your private key and RPC URL in `.env`
 
 3. Deploy to Polygon Mumbai testnet:
+
 ```bash
 forge script script/DeployNECTR.s.sol --rpc-url $POLYGON_MUMBAI_RPC_URL --broadcast --verify
 ```
@@ -90,6 +95,7 @@ The contract includes comprehensive tests covering:
 - Edge cases and error conditions
 
 Run tests with:
+
 ```bash
 forge test -vv
 ```
@@ -99,6 +105,7 @@ forge test -vv
 ⚠️ **This is a demo implementation** - Not audited for production use
 
 Key simplifications made for demo:
+
 - Simplified reward calculation
 - No withdrawal delays
 - Basic access controls

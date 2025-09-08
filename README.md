@@ -7,7 +7,7 @@ A full-stack Web3 application demonstrating blockchain integration with modern w
 NECTR is a comprehensive demo project that showcases:
 
 - **Smart Contract Development**: ERC-20 token with staking functionality
-- **Frontend Integration**: React/Next.js with Web3 wallet connectivity  
+- **Frontend Integration**: React/Next.js with Web3 wallet connectivity
 - **Social Media Integration**: Live Twitter/X feed embedding
 - **News Aggregation**: RSS feed integration with filtering
 - **Modern UI/UX**: Responsive design with Tailwind CSS
@@ -31,12 +31,14 @@ NECTR/
 ## 🛠 Tech Stack
 
 ### Smart Contracts
+
 - **Solidity** - Smart contract language
 - **Foundry** - Development framework
 - **OpenZeppelin** - Security-audited contract libraries
 - **Polygon Mumbai** - Testnet deployment
 
 ### Frontend
+
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS** - Utility-first CSS framework
@@ -44,6 +46,7 @@ NECTR/
 - **MetaMask** - Wallet integration
 
 ### Features
+
 - **Wallet Connection** - MetaMask integration
 - **Token Operations** - View balance, stake, unstake
 - **Social Media** - Live Twitter/X feed
@@ -120,6 +123,7 @@ NEXT_PUBLIC_RPC_URL=https://rpc-mumbai.maticvigil.com
 ## 🎯 Features Implemented
 
 ### ✅ Smart Contract
+
 - [x] ERC-20 token (NECTR)
 - [x] Staking mechanism
 - [x] Reward calculation (5% APY)
@@ -128,6 +132,7 @@ NEXT_PUBLIC_RPC_URL=https://rpc-mumbai.maticvigil.com
 - [x] Deployment scripts
 
 ### ✅ Frontend
+
 - [x] Wallet connection (MetaMask)
 - [x] Token balance display
 - [x] Staking interface
@@ -135,6 +140,7 @@ NEXT_PUBLIC_RPC_URL=https://rpc-mumbai.maticvigil.com
 - [x] Responsive design
 
 ### ✅ Integrations
+
 - [x] Twitter/X feed embedding
 - [x] News RSS feed
 - [x] Social media buttons
@@ -143,12 +149,14 @@ NEXT_PUBLIC_RPC_URL=https://rpc-mumbai.maticvigil.com
 ## 🧪 Testing
 
 ### Smart Contracts
+
 ```bash
 cd contracts
 forge test -vv
 ```
 
 ### Frontend
+
 ```bash
 cd frontend
 npm run test
@@ -169,6 +177,7 @@ npm run test
 ⚠️ **This is a demonstration project** - not audited for production use.
 
 Key simplifications for demo purposes:
+
 - Basic access controls
 - Simplified reward calculation
 - No advanced security patterns
@@ -177,17 +186,20 @@ Key simplifications for demo purposes:
 ## 🚀 Deployment
 
 ### Smart Contract
+
 - Deployed on Polygon Mumbai testnet
 - Contract address: `TBD after deployment`
 - Verified on PolygonScan
 
 ### Frontend
+
 - Deployed on Vercel/Netlify
 - Live demo: `TBD after deployment`
 
 ## 📋 Evaluation Criteria Addressed
 
 ### Smart Contract ✅
+
 - [x] Clear, correct Solidity code
 - [x] Proper ERC-20 implementation
 - [x] Staking logic with rewards
@@ -195,18 +207,21 @@ Key simplifications for demo purposes:
 - [x] Comprehensive testing
 
 ### Frontend UX ✅
+
 - [x] Responsive design
 - [x] Intuitive wallet integration
 - [x] Real-time transaction status
 - [x] Modern, clean interface
 
 ### Integration Modules ✅
+
 - [x] Working wallet connectivity
 - [x] Live social media feed
 - [x] News aggregation system
 - [x] Smooth user experience
 
 ### Code Quality ✅
+
 - [x] Modular architecture
 - [x] TypeScript for type safety
 - [x] Comprehensive comments
@@ -214,6 +229,7 @@ Key simplifications for demo purposes:
 - [x] Proper error handling
 
 ### Polish & Initiative ✅
+
 - [x] Bonus features implemented
 - [x] Creative UI elements
 - [x] Professional documentation
@@ -222,6 +238,7 @@ Key simplifications for demo purposes:
 ## 📞 Support
 
 For questions or issues:
+
 1. Check the documentation in each directory
 2. Review the test files for usage examples
 3. Refer to the deployment guides
