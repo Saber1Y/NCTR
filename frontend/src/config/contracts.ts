@@ -1,9 +1,7 @@
-// Contract configuration for NECTR token
 export const NECTR_CONTRACT = {
   address: "0xf23147Df55089eA6bA87BF24bb4eEE6f7Cea182b" as const,
-  chainId: 80002, // Polygon Amoy
+  chainId: 80002,
   abi: [
-    // ERC20 functions
     {
       inputs: [{ name: "account", type: "address" }],
       name: "balanceOf",
@@ -21,6 +19,17 @@ export const NECTR_CONTRACT = {
       stateMutability: "nonpayable",
       type: "function",
     },
+
+    {
+      inputs: [
+        { name: "to", type: "address" },
+        { name: "amount", type: "uint256" },
+      ],
+      name: "mint",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
     {
       inputs: [
         { name: "to", type: "address" },
@@ -31,7 +40,7 @@ export const NECTR_CONTRACT = {
       stateMutability: "nonpayable",
       type: "function",
     },
-    // Staking functions
+
     {
       inputs: [{ name: "amount", type: "uint256" }],
       name: "stake",
@@ -71,7 +80,6 @@ export const NECTR_CONTRACT = {
   ] as const,
 } as const;
 
-// Network configuration
 export const POLYGON_AMOY = {
   id: 80002,
   name: "Polygon Amoy",

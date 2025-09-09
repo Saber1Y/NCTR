@@ -4,6 +4,7 @@ import { useState } from "react";
 import ConnectButton from "@/components/Connectbtn";
 import SocialMediaFeed from "@/components/SocialMediaFeed";
 import NewsFeed from "@/components/NewsFeed";
+import TestTokenFaucet from "@/components/TestTokenFaucet";
 import { useAccount } from "wagmi";
 import { Meteors } from "@/components/ui/meteors";
 import {
@@ -390,6 +391,7 @@ export default function Home() {
 
           {/* Sidebar with Social Media and News */}
           <div className="xl:col-span-1 space-y-8">
+            <TestTokenFaucet />
             <SocialMediaFeed />
             <NewsFeed />
           </div>
