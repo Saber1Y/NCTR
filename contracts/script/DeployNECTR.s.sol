@@ -13,9 +13,9 @@ contract DeployNECTR is Script {
         
         // Deploy NECTR token with initial parameters
         NECTRToken token = new NECTRToken(
-            "NECTR Token",     // Token name
-            "NECTR",           // Token symbol
-            1000000            // Initial supply (1M tokens)
+            "NECTR Token",     
+            "NECTR",           
+            1000000            
         );
         
         console.log("NECTR Token deployed to:", address(token));

@@ -4,16 +4,90 @@ import { useState } from "react";
 import ConnectButton from "@/components/Connectbtn";
 import { useAccount } from "wagmi";
 import { Meteors } from "@/components/ui/meteors";
+import {
+  useNectrBalance,
+  useStakedBalance,
+  usePendingRewards,
+  useStakeTokens,
+  useUnstakeTokens,
+  useClaimRewards,
+  formatTokenAmount,
+} from "@/hooks/useNECTR";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Home() {
   const { address, isConnected } = useAccount();
-  const [nectrBalance, setNectrBalance] = useState("0");
-  const [stakedBalance, setStakedBalance] = useState("0");
-  const [pendingRewards, setPendingRewards] = useState("0");
+  const [stakeAmount, setStakeAmount] = useState("");
+  const [unstakeAmount, setUnstakeAmount] = useState("");
+  const queryClient = useQueryClient();
+
+  // Contract data hooks with refetch functions
+  const { data: nectrBalance, refetch: refetchBalance } =
+    useNectrBalance(address);
+  const { data: stakedBalance, refetch: refetchStaked } =
+    useStakedBalance(address);
+  const { data: pendingRewards, refetch: refetchRewards } =
+    usePendingRewards(address);
+
+  // Contract action hooks
+  const {
+    stake,
+    isPending: isStaking,
+    isConfirmed: stakeConfirmed,
+  } = useStakeTokens();
+  const {
+    unstake,
+    isPending: isUnstaking,
+    isConfirmed: unstakeConfirmed,
+  } = useUnstakeTokens();
+  const {
+    claimRewards,
+    isPending: isClaiming,
+    isConfirmed: claimConfirmed,
+  } = useClaimRewards();
+
+  // Manual refresh all data
+  const refreshAllData = async () => {
+    await Promise.all([refetchBalance(), refetchStaked(), refetchRewards()]);
+  };
+
+  // Format the balances for display
+  const formattedNectrBalance = formatTokenAmount(nectrBalance);
+  const formattedStakedBalance = formatTokenAmount(stakedBalance);
+  const formattedPendingRewards = formatTokenAmount(pendingRewards);
+
+  const handleStake = () => {
+    if (stakeAmount && parseFloat(stakeAmount) > 0) {
+      stake(stakeAmount);
+      setStakeAmount("");
+    }
+  };
+
+  const handleUnstake = () => {
+    if (unstakeAmount && parseFloat(unstakeAmount) > 0) {
+      unstake(unstakeAmount);
+      setUnstakeAmount("");
+    }
+  };
+
+  const handleClaimRewards = () => {
+    claimRewards();
+  };
+
+  const setMaxStakeAmount = () => {
+    if (nectrBalance) {
+      setStakeAmount(formatTokenAmount(nectrBalance));
+    }
+  };
+
+  const setMaxUnstakeAmount = () => {
+    if (stakedBalance) {
+      setUnstakeAmount(formatTokenAmount(stakedBalance));
+    }
+  };
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
       <nav className="flex items-center justify-between p-6 relative z-10">
         <div className="flex items-center space-x-2">
           <h1 className="text-2xl font-bold gradient-text">NECTR</h1>
@@ -72,7 +146,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-bold mb-2">{nectrBalance}</div>
+              <div className="text-3xl font-bold mb-2">
+                {formattedNectrBalance}
+              </div>
               <div className="text-sm opacity-60">NECTR</div>
             </div>
 
@@ -90,7 +166,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-bold mb-2">{stakedBalance}</div>
+              <div className="text-3xl font-bold mb-2">
+                {formattedStakedBalance}
+              </div>
               <div className="text-sm opacity-60">NECTR</div>
             </div>
 
@@ -110,7 +188,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-bold mb-2">{pendingRewards}</div>
+              <div className="text-3xl font-bold mb-2">
+                {formattedPendingRewards}
+              </div>
               <div className="text-sm opacity-60">NECTR</div>
             </div>
 
@@ -153,15 +233,26 @@ export default function Home() {
                     <input
                       type="number"
                       placeholder="0.0"
+                      value={stakeAmount}
+                      onChange={(e) => setStakeAmount(e.target.value)}
                       className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20"
                     />
-                    <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-purple-400 hover:text-purple-300">
+                    <button
+                      onClick={setMaxStakeAmount}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-purple-400 hover:text-purple-300"
+                    >
                       MAX
                     </button>
                   </div>
                 </div>
-                <button className="btn-primary w-full py-4 text-lg">
-                  Stake Tokens
+                <button
+                  onClick={handleStake}
+                  disabled={
+                    isStaking || !stakeAmount || parseFloat(stakeAmount) <= 0
+                  }
+                  className="btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isStaking ? "Staking..." : "Stake Tokens"}
                 </button>
                 <div className="text-sm opacity-60 text-center">
                   You will earn 5% APY on staked tokens
@@ -184,18 +275,39 @@ export default function Home() {
                     <input
                       type="number"
                       placeholder="0.0"
+                      value={unstakeAmount}
+                      onChange={(e) => setUnstakeAmount(e.target.value)}
                       className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
                     />
-                    <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-cyan-400 hover:text-cyan-300">
+                    <button
+                      onClick={setMaxUnstakeAmount}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-cyan-400 hover:text-cyan-300"
+                    >
                       MAX
                     </button>
                   </div>
                 </div>
-                <button className="btn-secondary w-full py-4 text-lg">
-                  Unstake Tokens
+                <button
+                  onClick={handleUnstake}
+                  disabled={
+                    isUnstaking ||
+                    !unstakeAmount ||
+                    parseFloat(unstakeAmount) <= 0
+                  }
+                  className="btn-secondary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isUnstaking ? "Unstaking..." : "Unstake Tokens"}
                 </button>
-                <button className="btn-primary w-full py-3">
-                  Claim Rewards ({pendingRewards} NECTR)
+                <button
+                  onClick={handleClaimRewards}
+                  disabled={
+                    isClaiming || parseFloat(formattedPendingRewards) <= 0
+                  }
+                  className="btn-primary w-full py-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isClaiming
+                    ? "Claiming..."
+                    : `Claim Rewards (${formattedPendingRewards} NECTR)`}
                 </button>
               </div>
               <Meteors number={15} />
@@ -203,7 +315,6 @@ export default function Home() {
           </div>
         )}
 
-        {/* Features Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-12">Why Choose NECTR?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -270,13 +381,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Footer */}
       <footer className="border-t border-white/10 py-8">
         <div className="container mx-auto px-6 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-lg"></div>
-            <span className="text-xl font-bold gradient-text">NECTR</span>
-          </div>
           <p className="opacity-60">Built with ❤️ for the future of DeFi</p>
         </div>
       </footer>

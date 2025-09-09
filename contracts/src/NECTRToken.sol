@@ -10,11 +10,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @dev Simplified implementation for demo purposes
  */
 contract NECTRToken is ERC20, Ownable {
-    // Staking state variables
+
     mapping(address => uint256) public stakedBalances;
     mapping(address => uint256) public stakingStartTime;
     
-    // Staking rewards configuration
+
     uint256 public stakingRewardRate = 5; // 5% annual reward rate
     uint256 public constant SECONDS_IN_YEAR = 365 * 24 * 60 * 60;
     
