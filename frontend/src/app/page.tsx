@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ConnectButton from "@/components/Connectbtn";
 import { useAccount } from "wagmi";
+import { Meteors } from "@/components/ui/meteors";
 
 export default function Home() {
   const { address, isConnected } = useAccount();
@@ -139,9 +140,11 @@ export default function Home() {
         {isConnected && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
             {/* Stake Card */}
-            <div className="card-glass">
-              <h3 className="text-2xl font-bold mb-6">Stake NECTR</h3>
-              <div className="space-y-4">
+            <div className="card-glass relative overflow-hidden">
+              <h3 className="text-2xl font-bold mb-6 relative z-10">
+                Stake NECTR
+              </h3>
+              <div className="space-y-4 relative z-10">
                 <div>
                   <label className="block text-sm font-medium opacity-80 mb-2">
                     Amount to Stake
@@ -164,12 +167,15 @@ export default function Home() {
                   You will earn 5% APY on staked tokens
                 </div>
               </div>
+              <Meteors number={15} />
             </div>
 
             {/* Unstake Card */}
-            <div className="card-glass">
-              <h3 className="text-2xl font-bold mb-6">Unstake NECTR</h3>
-              <div className="space-y-4">
+            <div className="card-glass relative overflow-hidden">
+              <h3 className="text-2xl font-bold mb-6 relative z-10">
+                Unstake NECTR
+              </h3>
+              <div className="space-y-4 relative z-10">
                 <div>
                   <label className="block text-sm font-medium opacity-80 mb-2">
                     Amount to Unstake
@@ -192,6 +198,7 @@ export default function Home() {
                   Claim Rewards ({pendingRewards} NECTR)
                 </button>
               </div>
+              <Meteors number={15} />
             </div>
           </div>
         )}
@@ -200,8 +207,8 @@ export default function Home() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-12">Why Choose NECTR?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card-glass text-center">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center">
+            <div className="card-glass text-center relative overflow-hidden">
+              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center relative z-10">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="currentColor"
@@ -210,15 +217,18 @@ export default function Home() {
                   <path d="M12 1L9 9l-8 3 8 3 3 8 3-8 8-3-8-3-3-8z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">High Rewards</h3>
-              <p className="opacity-80">
+              <h3 className="text-xl font-bold mb-4 relative z-10">
+                High Rewards
+              </h3>
+              <p className="opacity-80 relative z-10">
                 Earn up to 5% APY on your staked NECTR tokens with our optimized
                 reward system.
               </p>
+              <Meteors number={10} />
             </div>
 
-            <div className="card-glass text-center">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center">
+            <div className="card-glass text-center relative overflow-hidden">
+              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center relative z-10">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="currentColor"
@@ -227,15 +237,18 @@ export default function Home() {
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Secure & Audited</h3>
-              <p className="opacity-80">
+              <h3 className="text-xl font-bold mb-4 relative z-10">
+                Secure & Audited
+              </h3>
+              <p className="opacity-80 relative z-10">
                 Built with OpenZeppelin contracts and comprehensive testing for
                 maximum security.
               </p>
+              <Meteors number={10} />
             </div>
 
-            <div className="card-glass text-center">
-              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-green-400 to-green-600 rounded-2xl flex items-center justify-center">
+            <div className="card-glass text-center relative overflow-hidden">
+              <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-green-400 to-green-600 rounded-2xl flex items-center justify-center relative z-10">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="currentColor"
@@ -244,11 +257,14 @@ export default function Home() {
                   <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Flexible Staking</h3>
-              <p className="opacity-80">
+              <h3 className="text-xl font-bold mb-4 relative z-10">
+                Flexible Staking
+              </h3>
+              <p className="opacity-80 relative z-10">
                 Stake and unstake anytime with no lock-up periods. Your tokens,
                 your choice.
               </p>
+              <Meteors number={10} />
             </div>
           </div>
         </div>
