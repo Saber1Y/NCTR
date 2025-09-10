@@ -8,8 +8,12 @@ import React, {
   ReactNode,
 } from "react";
 
-// Language data - stored locally
-const translations = {
+type TranslationObject = {
+  [key: string]: string | TranslationObject;
+  [key: number]: never; 
+};
+
+const translations: { [key in Language]: TranslationObject } = {
   en: {
     navigation: {
       title: "NECTR",
@@ -127,7 +131,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>("hu");
 
   const languages = [
     { code: "en" as Language, name: "English", flag: "🇺🇸" },
@@ -151,16 +155,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = (key: TranslationKey): string => {
     const keys = key.split(".");
-    let value: any = translations[language];
+    let value: unknown = translations[language];
 
     for (const k of keys) {
       if (value && typeof value === "object" && k in value) {
-        value = value[k];
+        value = (value as TranslationObject)[k];
       } else {
         console.warn(
           `Translation missing for key: ${key} in language: ${language}`
         );
-        return key; // Return the key if translation is not found
+        return key; 
       }
     }
 

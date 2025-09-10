@@ -9,7 +9,7 @@ import { NECTR_CONTRACT } from "@/config/contracts";
 import { Coins, Loader2 } from "lucide-react";
 
 const TestTokenFaucet = () => {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
   const [isRequesting, setIsRequesting] = useState(false);
   const { writeContract, data: hash, isPending, error } = useWriteContract();
 
@@ -23,14 +23,14 @@ const TestTokenFaucet = () => {
     try {
       setIsRequesting(true);
 
-      // Mint 10,000 NECTR tokens to the connected wallet
+      
       writeContract({
         address: NECTR_CONTRACT.address,
         abi: NECTR_CONTRACT.abi,
         functionName: "mint",
         args: [
-          address, // Connected wallet address
-          parseEther("10000"), // 10,000 tokens
+          address, 
+          parseEther("10000"), 
         ],
       });
     } catch (err) {
