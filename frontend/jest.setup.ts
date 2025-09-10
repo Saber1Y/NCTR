@@ -1,13 +1,5 @@
-import '@testing-library/jest-dom';
-import { TextEncoder, TextDecoder } from 'util';
-
-// Ensure Jest types are available
-declare global {
-  var jest: typeof import('@jest/globals').jest;
-  var beforeEach: typeof import('@jest/globals').beforeEach;
-  var beforeAll: typeof import('@jest/globals').beforeAll;
-  var afterAll: typeof import('@jest/globals').afterAll;
-}
+import "@testing-library/jest-dom";
+import { TextEncoder, TextDecoder } from "util";
 
 // Polyfills for Node.js environment
 Object.assign(global, { TextDecoder, TextEncoder });
@@ -39,12 +31,12 @@ const createLocalStorageMock = () => {
 
 const localStorageMock = createLocalStorageMock();
 
-Object.defineProperty(window, 'localStorage', {
+Object.defineProperty(window, "localStorage", {
   value: localStorageMock,
   writable: true,
 });
 
-Object.defineProperty(global, 'localStorage', {
+Object.defineProperty(global, "localStorage", {
   value: localStorageMock,
   writable: true,
 });
@@ -56,7 +48,7 @@ beforeEach(() => {
 });
 
 // Mock Next.js router
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
@@ -65,19 +57,19 @@ jest.mock('next/navigation', () => ({
     refresh: jest.fn(),
     prefetch: jest.fn(),
   }),
-  usePathname: () => '/',
+  usePathname: () => "/",
   useSearchParams: () => new URLSearchParams(),
 }));
 
 // Mock Wagmi hooks
-jest.mock('wagmi', () => ({
+jest.mock("wagmi", () => ({
   useAccount: () => ({
-    address: '0x1234567890123456789012345678901234567890' as `0x${string}`,
+    address: "0x1234567890123456789012345678901234567890" as `0x${string}`,
     isConnected: false,
     isConnecting: false,
     isDisconnected: true,
     isReconnecting: false,
-    status: 'disconnected' as const,
+    status: "disconnected" as const,
   }),
   useConnect: () => ({
     connect: jest.fn(),
@@ -118,7 +110,7 @@ jest.mock('wagmi', () => ({
 }));
 
 // Mock AppKit
-jest.mock('@reown/appkit/react', () => ({
+jest.mock("@reown/appkit/react", () => ({
   useAppKit: () => ({
     open: jest.fn(),
     close: jest.fn(),
@@ -127,30 +119,30 @@ jest.mock('@reown/appkit/react', () => ({
     address: undefined,
     isConnected: false,
     caipAddress: undefined,
-    status: 'disconnected',
+    status: "disconnected",
   }),
   useAppKitNetwork: () => ({
     chainId: 1,
-    caipNetworkId: 'eip155:1',
+    caipNetworkId: "eip155:1",
   }),
 }));
 
 // Mock NECTR hooks
-jest.mock('@/hooks/useNECTR', () => ({
+jest.mock("@/hooks/useNECTR", () => ({
   useNectrBalance: () => ({
-    data: BigInt('1000000000000000000'), // 1 NECTR
+    data: BigInt("1000000000000000000"), // 1 NECTR
     isLoading: false,
     isError: false,
     error: null,
   }),
   useStakedBalance: () => ({
-    data: BigInt('500000000000000000'), // 0.5 NECTR
+    data: BigInt("500000000000000000"), // 0.5 NECTR
     isLoading: false,
     isError: false,
     error: null,
   }),
   usePendingRewards: () => ({
-    data: BigInt('100000000000000000'), // 0.1 NECTR
+    data: BigInt("100000000000000000"), // 0.1 NECTR
     isLoading: false,
     isError: false,
     error: null,
@@ -177,26 +169,26 @@ jest.mock('@/hooks/useNECTR', () => ({
     error: null,
   }),
   formatTokenAmount: (amount?: bigint) => {
-    if (!amount) return '0.00';
+    if (!amount) return "0.00";
     return (Number(amount) / 1e18).toFixed(2);
   },
 }));
 
 // Mock framer-motion
-jest.mock('framer-motion', () => ({
+jest.mock("framer-motion", () => ({
   motion: {
-    div: 'div',
-    span: 'span',
-    h1: 'h1',
-    h2: 'h2',
-    p: 'p',
-    button: 'button',
+    div: "div",
+    span: "span",
+    h1: "h1",
+    h2: "h2",
+    p: "p",
+    button: "button",
   },
   AnimatePresence: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 // Mock Meteors component
-jest.mock('@/components/ui/meteors', () => ({
+jest.mock("@/components/ui/meteors", () => ({
   Meteors: () => null,
 }));
 
@@ -207,8 +199,8 @@ const originalConsoleError = console.error;
 beforeAll(() => {
   console.warn = (...args: unknown[]) => {
     if (
-      typeof args[0] === 'string' &&
-      args[0].includes('Translation missing')
+      typeof args[0] === "string" &&
+      args[0].includes("Translation missing")
     ) {
       return;
     }
@@ -217,9 +209,9 @@ beforeAll(() => {
 
   console.error = (...args: unknown[]) => {
     if (
-      typeof args[0] === 'string' &&
-      (args[0].includes('Warning: ReactDOM.render is deprecated') ||
-        args[0].includes('Warning: React.createElement'))
+      typeof args[0] === "string" &&
+      (args[0].includes("Warning: ReactDOM.render is deprecated") ||
+        args[0].includes("Warning: React.createElement"))
     ) {
       return;
     }
