@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "title": "NECTR"
+  },
+  "hero": {
+    "title": "Üdvözöljük a NECTR-ben",
+    "subtitle": "Tételes NECTR tokeneket és szerezz jutalmakat egy gyönyörű, modern DeFi platformon. Tapasztald meg a decentralizált pénzügyek jövőjét."
+  },
+  "dashboard": {
+    "balance": "NECTR Egyenleg",
+    "staked": "Letétbe helyezett",
+    "pendingRewards": "Függő jutalmak",
+    "stake": "Letétbe helyezés",
+    "unstake": "Kivonás",
+    "claimRewards": "Jutalmak igénylése",
+    "amount": "Összeg",
+    "max": "MAX",
+    "refreshData": "Adatok frissítése"
+  },
+  "wallet": {
+    "connect": "Pénztárca csatlakoztatása",
+    "connected": "Csatlakoztatva",
+    "disconnect": "Leválasztás"
+  },
+  "social": {
+    "socialFeed": "Közösségi hírfolyam",
+    "newsFeed": "Hírek"
+  },
+  "language": {
+    "select": "Nyelv kiválasztása",
+    "english": "English",
+    "hungarian": "Magyar",
+    "dutch": "Nederlands"
+  },
+  "NotFoundPage": {
+    "title": "404 - Az oldal nem található",
+    "description": "A keresett oldal nem létezik.",
+    "backHome": "Vissza a főoldalra"
+  }
+}

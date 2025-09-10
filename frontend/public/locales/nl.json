@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "title": "NECTR"
+  },
+  "hero": {
+    "title": "Welkom bij NECTR",
+    "subtitle": "Stake je NECTR tokens en verdien beloningen op een prachtig, modern DeFi platform. Ervaar de toekomst van gedecentraliseerde financiën."
+  },
+  "dashboard": {
+    "balance": "NECTR Saldo",
+    "staked": "Gestaked",
+    "pendingRewards": "Wachtende beloningen",
+    "stake": "Staken",
+    "unstake": "Unstaken",
+    "claimRewards": "Beloningen claimen",
+    "amount": "Bedrag",
+    "max": "MAX",
+    "refreshData": "Gegevens vernieuwen"
+  },
+  "wallet": {
+    "connect": "Wallet verbinden",
+    "connected": "Verbonden",
+    "disconnect": "Verbinding verbreken"
+  },
+  "social": {
+    "socialFeed": "Sociale feed",
+    "newsFeed": "Nieuwsfeed"
+  },
+  "language": {
+    "select": "Selecteer taal",
+    "english": "English",
+    "hungarian": "Magyar",
+    "dutch": "Nederlands"
+  },
+  "NotFoundPage": {
+    "title": "404 - Pagina niet gevonden",
+    "description": "De pagina die u zoekt bestaat niet.",
+    "backHome": "Terug naar home"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "navigation": {
+    "title": "NECTR"
+  },
+  "hero": {
+    "title": "Welcome to NECTR",
+    "subtitle": "Stake your NECTR tokens and earn rewards in a beautiful, modern DeFi platform. Experience the future of decentralized finance."
+  },
+  "dashboard": {
+    "balance": "NECTR Balance",
+    "staked": "Staked",
+    "pendingRewards": "Pending Rewards",
+    "stake": "Stake",
+    "unstake": "Unstake",
+    "claimRewards": "Claim Rewards",
+    "amount": "Amount",
+    "max": "MAX",
+    "refreshData": "Refresh Data"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connected": "Connected",
+    "disconnect": "Disconnect"
+  },
+  "social": {
+    "socialFeed": "Social Feed",
+    "newsFeed": "News Feed"
+  },
+  "language": {
+    "select": "Select Language",
+    "english": "English",
+    "hungarian": "Magyar",
+    "dutch": "Nederlands"
+  },
+  "NotFoundPage": {
+    "title": "404 - Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "backHome": "Go back home"
+  }
+}

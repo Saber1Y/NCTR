@@ -5,8 +5,10 @@ import ConnectButton from "@/components/Connectbtn";
 import SocialMediaFeed from "@/components/SocialMediaFeed";
 import NewsFeed from "@/components/NewsFeed";
 import TestTokenFaucet from "@/components/TestTokenFaucet";
+import LanguageToggle from "@/components/LanguageToggle";
 import { useAccount } from "wagmi";
 import { Meteors } from "@/components/ui/meteors";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   useNectrBalance,
   useStakedBalance,
@@ -16,43 +18,22 @@ import {
   useClaimRewards,
   formatTokenAmount,
 } from "@/hooks/useNECTR";
-import { useQueryClient } from "@tanstack/react-query";
 
 export default function Home() {
   const { address, isConnected } = useAccount();
   const [stakeAmount, setStakeAmount] = useState("");
   const [unstakeAmount, setUnstakeAmount] = useState("");
-  const queryClient = useQueryClient();
+  const { t } = useLanguage();
 
   // Contract data hooks with refetch functions
-  const { data: nectrBalance, refetch: refetchBalance } =
-    useNectrBalance(address);
-  const { data: stakedBalance, refetch: refetchStaked } =
-    useStakedBalance(address);
-  const { data: pendingRewards, refetch: refetchRewards } =
-    usePendingRewards(address);
+  const { data: nectrBalance } = useNectrBalance(address);
+  const { data: stakedBalance } = useStakedBalance(address);
+  const { data: pendingRewards } = usePendingRewards(address);
 
   // Contract action hooks
-  const {
-    stake,
-    isPending: isStaking,
-    isConfirmed: stakeConfirmed,
-  } = useStakeTokens();
-  const {
-    unstake,
-    isPending: isUnstaking,
-    isConfirmed: unstakeConfirmed,
-  } = useUnstakeTokens();
-  const {
-    claimRewards,
-    isPending: isClaiming,
-    isConfirmed: claimConfirmed,
-  } = useClaimRewards();
-
-  // Manual refresh all data
-  const refreshAllData = async () => {
-    await Promise.all([refetchBalance(), refetchStaked(), refetchRewards()]);
-  };
+  const { stake, isPending: isStaking } = useStakeTokens();
+  const { unstake, isPending: isUnstaking } = useUnstakeTokens();
+  const { claimRewards, isPending: isClaiming } = useClaimRewards();
 
   // Format the balances for display
   const formattedNectrBalance = formatTokenAmount(nectrBalance);
@@ -93,21 +74,14 @@ export default function Home() {
     <div className="min-h-screen">
       <nav className="flex items-center justify-between p-6 relative z-10">
         <div className="flex items-center space-x-2">
-          <h1 className="text-2xl font-bold gradient-text">NECTR</h1>
+          <h1 className="text-2xl font-bold gradient-text">
+            {t("navigation.title")}
+          </h1>
         </div>
 
         <div className="flex items-center space-x-4">
-          {/* {isConnected ? (
-            <div className="flex items-center space-x-3">
-              <div className="card-glass px-4 py-2">
-                <span className="text-sm opacity-80">Connected</span>
-                <div className="font-mono text-sm">{address}</div>
-              </div>
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-            </div>
-          ) : ( */}
+          <LanguageToggle />
           <ConnectButton />
-          {/* )} */}
         </div>
       </nav>
 
@@ -117,13 +91,10 @@ export default function Home() {
           {/* Main Content */}
           <div className="xl:col-span-3">
             <div className="text-center mb-16">
-              <h1 className="text-6xl font-bold mb-6">
-                Welcome to <span className="gradient-text">NECTR</span>
-              </h1>
+              <h1 className="text-6xl font-bold mb-6">{t("hero.title")}</h1>
 
               <p className="text-xl opacity-90 max-w-2xl mx-auto mb-8">
-                Stake your NECTR tokens and earn rewards in a beautiful, modern
-                DeFi platform. Experience the future of decentralized finance.
+                {t("hero.subtitle")}
               </p>
 
               {!isConnected && (
@@ -140,7 +111,7 @@ export default function Home() {
                 <div className="card-glass">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold opacity-80">
-                      NECTR Balance
+                      {t("dashboard.balance")}
                     </h3>
                     <div className="w-8 h-8 bg-purple-400 rounded-lg flex items-center justify-center">
                       <svg
@@ -161,7 +132,9 @@ export default function Home() {
                 {/* Staked Card */}
                 <div className="card-glass">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold opacity-80">Staked</h3>
+                    <h3 className="text-lg font-semibold opacity-80">
+                      {t("dashboard.staked")}
+                    </h3>
                     <div className="w-8 h-8 bg-cyan-400 rounded-lg flex items-center justify-center">
                       <svg
                         className="w-4 h-4 text-white"
@@ -182,7 +155,7 @@ export default function Home() {
                 <div className="card-glass">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold opacity-80">
-                      Pending Rewards
+                      {t("dashboard.pendingRewards")}
                     </h3>
                     <div className="w-8 h-8 bg-green-400 rounded-lg flex items-center justify-center">
                       <svg
@@ -228,12 +201,12 @@ export default function Home() {
                 {/* Stake Card */}
                 <div className="card-glass relative overflow-hidden">
                   <h3 className="text-2xl font-bold mb-6 relative z-10">
-                    Stake NECTR
+                    {t("dashboard.stake")} NECTR
                   </h3>
                   <div className="space-y-4 relative z-10">
                     <div>
                       <label className="block text-sm font-medium opacity-80 mb-2">
-                        Amount to Stake
+                        {t("dashboard.amount")} to {t("dashboard.stake")}
                       </label>
                       <div className="relative">
                         <input
@@ -247,7 +220,7 @@ export default function Home() {
                           onClick={setMaxStakeAmount}
                           className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-purple-400 hover:text-purple-300"
                         >
-                          MAX
+                          {t("dashboard.max")}
                         </button>
                       </div>
                     </div>
@@ -260,11 +233,10 @@ export default function Home() {
                       }
                       className="btn-primary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isStaking ? "Staking..." : "Stake Tokens"}
+                      {isStaking
+                        ? "Staking..."
+                        : `${t("dashboard.stake")} Tokens`}
                     </button>
-                    <div className="text-sm opacity-60 text-center">
-                      You will earn 5% APY on staked tokens
-                    </div>
                   </div>
                   <Meteors number={15} />
                 </div>
@@ -272,12 +244,12 @@ export default function Home() {
                 {/* Unstake Card */}
                 <div className="card-glass relative overflow-hidden">
                   <h3 className="text-2xl font-bold mb-6 relative z-10">
-                    Unstake NECTR
+                    {t("dashboard.unstake")} NECTR
                   </h3>
                   <div className="space-y-4 relative z-10">
                     <div>
                       <label className="block text-sm font-medium opacity-80 mb-2">
-                        Amount to Unstake
+                        {t("dashboard.amount")} to {t("dashboard.unstake")}
                       </label>
                       <div className="relative">
                         <input
@@ -291,7 +263,7 @@ export default function Home() {
                           onClick={setMaxUnstakeAmount}
                           className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm font-medium text-cyan-400 hover:text-cyan-300"
                         >
-                          MAX
+                          {t("dashboard.max")}
                         </button>
                       </div>
                     </div>
@@ -304,7 +276,9 @@ export default function Home() {
                       }
                       className="btn-secondary w-full py-4 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isUnstaking ? "Unstaking..." : "Unstake Tokens"}
+                      {isUnstaking
+                        ? "Unstaking..."
+                        : `${t("dashboard.unstake")} Tokens`}
                     </button>
                     <button
                       onClick={handleClaimRewards}
@@ -315,7 +289,9 @@ export default function Home() {
                     >
                       {isClaiming
                         ? "Claiming..."
-                        : `Claim Rewards (${formattedPendingRewards} NECTR)`}
+                        : `${t(
+                            "dashboard.claimRewards"
+                          )} (${formattedPendingRewards} NECTR)`}
                     </button>
                   </div>
                   <Meteors number={15} />
@@ -389,7 +365,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Sidebar with Social Media and News */}
+          {/* Sidebar */}
           <div className="xl:col-span-1 space-y-8">
             <TestTokenFaucet />
             <SocialMediaFeed />
