@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { Twitter, MessageCircle, Users } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const SocialMediaFeed = () => {
+  const { t } = useLanguage();
+
   useEffect(() => {
     // Load Twitter widgets script
     const script = document.createElement("script");
@@ -25,7 +28,7 @@ const SocialMediaFeed = () => {
     <div className="card-glass">
       <h3 className="text-xl font-bold mb-6 flex items-center space-x-2">
         <Twitter className="w-5 h-5 text-blue-400" />
-        <span>Community & Updates</span>
+        <span>{t("social.title")}</span>
       </h3>
 
       {/* Twitter Timeline Embed */}
@@ -37,14 +40,14 @@ const SocialMediaFeed = () => {
           data-chrome="noheader nofooter noborders transparent"
           href="https://twitter.com/ethereum?ref_src=twsrc%5Etfw"
         >
-          Loading tweets...
+          {t("social.loading")}
         </a>
       </div>
 
       {/* Social Buttons */}
       <div className="space-y-3">
         <h4 className="text-sm font-medium opacity-80 mb-3">
-          Join Our Community
+          {t("social.join")}
         </h4>
 
         <a
@@ -57,9 +60,9 @@ const SocialMediaFeed = () => {
             <Twitter className="w-4 h-4 text-white" />
           </div>
           <div>
-            <div className="font-medium">Follow on Twitter</div>
+            <div className="font-medium">{t("social.twitter.title")}</div>
             <div className="text-sm opacity-60">
-              Latest updates & announcements
+              {t("social.twitter.description")}
             </div>
           </div>
         </a>
@@ -74,8 +77,10 @@ const SocialMediaFeed = () => {
             <MessageCircle className="w-4 h-4 text-white" />
           </div>
           <div>
-            <div className="font-medium">Join Telegram</div>
-            <div className="text-sm opacity-60">Chat with the community</div>
+            <div className="font-medium">{t("social.telegram.title")}</div>
+            <div className="text-sm opacity-60">
+              {t("social.telegram.description")}
+            </div>
           </div>
         </a>
 
@@ -89,8 +94,10 @@ const SocialMediaFeed = () => {
             <Users className="w-4 h-4 text-white" />
           </div>
           <div>
-            <div className="font-medium">Join Discord</div>
-            <div className="text-sm opacity-60">Voice & text discussions</div>
+            <div className="font-medium">{t("social.discord.title")}</div>
+            <div className="text-sm opacity-60">
+              {t("social.discord.description")}
+            </div>
           </div>
         </a>
       </div>

@@ -305,7 +305,9 @@ export default function Home() {
             )}
 
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-12">Why Choose NECTR?</h2>
+              <h2 className="text-4xl font-bold mb-12">
+                {t("features.title")}
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="card-glass text-center relative overflow-hidden">
                   <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center relative z-10">
@@ -318,11 +320,10 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 relative z-10">
-                    High Rewards
+                    {t("features.highRewards.title")}
                   </h3>
                   <p className="opacity-80 relative z-10">
-                    Earn up to 5% APY on your staked NECTR tokens with our
-                    optimized reward system.
+                    {t("features.highRewards.description")}
                   </p>
                   <Meteors number={10} />
                 </div>
@@ -338,11 +339,10 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 relative z-10">
-                    Secure & Audited
+                    {t("features.secure.title")}
                   </h3>
                   <p className="opacity-80 relative z-10">
-                    Built with OpenZeppelin contracts and comprehensive testing
-                    for maximum security.
+                    {t("features.secure.description")}
                   </p>
                   <Meteors number={10} />
                 </div>
@@ -358,11 +358,10 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold mb-4 relative z-10">
-                    Flexible Staking
+                    {t("features.flexible.title")}
                   </h3>
                   <p className="opacity-80 relative z-10">
-                    Stake and unstake anytime with no lock-up periods. Your
-                    tokens, your choice.
+                    {t("features.flexible.description")}
                   </p>
                   <Meteors number={10} />
                 </div>

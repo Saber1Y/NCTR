@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Newspaper, ExternalLink, Calendar, Filter } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NewsArticle {
   title: string;
@@ -13,6 +14,7 @@ const NewsFeed = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "defi" | "blockchain">("all");
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Mock data for immediate demo (replace with real RSS later)
@@ -106,7 +108,7 @@ const NewsFeed = () => {
       <div className="card-glass">
         <div className="flex items-center space-x-2 mb-6">
           <Newspaper className="w-5 h-5 text-green-400 animate-pulse" />
-          <span className="text-xl font-bold">Loading News...</span>
+          <span className="text-xl font-bold">{t("news.loading")}</span>
         </div>
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
@@ -126,7 +128,7 @@ const NewsFeed = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-2">
           <Newspaper className="w-5 h-5 text-green-400" />
-          <span className="text-xl font-bold">Crypto News</span>
+          <span className="text-xl font-bold">{t("news.title")}</span>
         </div>
 
         {/* Filter Buttons */}
@@ -139,9 +141,9 @@ const NewsFeed = () => {
             }
             className="bg-white/10 border border-white/20 rounded px-2 py-1 text-sm focus:outline-none focus:border-green-400"
           >
-            <option value="all">All News</option>
-            <option value="defi">DeFi</option>
-            <option value="blockchain">Blockchain</option>
+            <option value="all">{t("news.filter.all")}</option>
+            <option value="defi">{t("news.filter.defi")}</option>
+            <option value="blockchain">{t("news.filter.blockchain")}</option>
           </select>
         </div>
       </div>
@@ -182,9 +184,7 @@ const NewsFeed = () => {
       </div>
 
       <div className="mt-4 pt-4 border-t border-white/10">
-        <p className="text-xs text-center opacity-50">
-          News updates every 15 minutes
-        </p>
+        <p className="text-xs text-center opacity-50">{t("news.updated")}</p>
       </div>
     </div>
   );
