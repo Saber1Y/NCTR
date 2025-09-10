@@ -72,15 +72,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      <nav className="flex items-center justify-between p-6 relative z-10">
+      <nav className="flex items-center justify-between p-4 sm:p-6 relative z-10">
         <div className="flex items-center space-x-2">
-          <h1 className="text-2xl font-bold gradient-text">
+          <h1 className="text-xl sm:text-2xl font-bold gradient-text">
             {t("navigation.title")}
           </h1>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <LanguageToggle />
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          <div className="hidden sm:block">
+            <LanguageToggle />
+          </div>
+          <div className="sm:hidden">
+            <LanguageToggle />
+          </div>
           <ConnectButton />
         </div>
       </nav>
